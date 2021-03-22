@@ -12,8 +12,8 @@
 	<description>Maven Web Project for Java Project</description>
 
 	<organization>
-		<name>Mithun Technologies</name>
-		<url>http://mithuntechnologies.com/</url>
+		<name>Bharath Demo</name>
+		<url>http://bharathtest.com/</url>
 	</organization>
 
 	<properties>
