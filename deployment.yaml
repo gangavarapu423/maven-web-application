@@ -1,0 +1,40 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: basic-user-pass-docker
+  annotations:
+          tekton.dev/docker-0: https://index.docker.io # Described below
+type: kubernetes.io/basic-auth
+stringData:
+  username: dhemanth
+  password: 014f6e9c-beb3-45d8-9980-5b9869f2d9c0
+---  
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: docker-target
+spec:
+  type: image
+  params:
+    - name: url
+      value: index.docker.io/dhemanth/tekton
+---      
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: git-source
+spec:
+  type: git
+  params:
+    - name: revision
+      value: master
+    - name: url
+      value: https://github.com/hemanth-crypto/simple-nodejs-app
+---      
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: tekton-sa
+secrets:
+  - name: basic-user-pass-docker
